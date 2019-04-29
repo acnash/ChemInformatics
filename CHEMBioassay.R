@@ -52,9 +52,35 @@ getEnsemblProteinDetails <- function(uniProtIDs, attributeCharVector, filtersCha
 #===============================================================
 
 clusterCompoundsByActivityProfile <- function(db, compoundCIDs) {
+ 
+  #retrieve activity data for a given list of compounds into a bioassaySet object
   assayData <- getBioassaySetByCids(db, compoundCIDs)
   print(assayData)
 
+  #convert assayData into a matrix of "targets(rows) vs. compounds(cols)"
+  #data from multiple assays hitting the same target are summarized into a single value
+
+  #in the matrix a (2) represents an active compound vs target combination, a (1) represents an inactive combindation, and a (0) represents an untested or inconclusive combination. Inactive results are filtered out with inactive=FALSE.
+  activityMatrix <- perTargetMatrix(assayData, inactive=FALSE, summarizeReplicates = "mode")
+  #print(activityMatrix)
+
+  assayTargets <- assaySetTargets(assayData)
+  customMerge <- sapply(assayTargets, translateTargetId, database=db, category="kClust")
+
+  #the merged matrix is smaller because several protein targets have been collapsed into single clusters.
+  mergedActivityMatrix <- perTargetMatrix(assayData, inactive=FALSE, assayTargets=customMerge)
+  print(paste("Before merging targets by similar sequence:",dim(activityMatrix)))
+  print(paste("After merging", dim(mergedActivityMatrix)))
+
+  binaryMatrix <- 1*(mergedActivityMatrix > 1)
+
+  transposedMatrix <- t(binaryMatrix)
+  distanceMatrix <- dist(transposedMatrix)
+
+  clusterResults <- hclust(distanceMatrix, method="average")
+  return(clusterResults)
+
+  #plot(clusterResults)
 }
 
 
