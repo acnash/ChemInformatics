@@ -1,6 +1,6 @@
 
-clusterWithFMCSAromatic <- function(SDFset, au=2, bu=1, coefficient=1) {
-  if(coefficient==1) {
+clusterWithFMCSAromatic <- function(SDFset, au=2, bu=1, overlapCoefficient=TRUE) {
+  if(overlapCoefficient==TRUE) {
     print("Running batch aromatic FMCS and returning the overlap coefficient")
     d <- sapply(cid(SDFset), function(x) fmcsBatch(SDFset[x], SDFset, au=au, bu=bu, matching.mode="aromatic", numParallel=12)[,"Overlap_Coefficient"])
   } else {
@@ -12,8 +12,8 @@ clusterWithFMCSAromatic <- function(SDFset, au=2, bu=1, coefficient=1) {
 
 #=========================================
 
-clusterWithFMCSStatic <- function(SDFset, au=2, bu=1, coefficient=1) {
-  if(coefficient==1) {
+clusterWithFMCSStatic <- function(SDFset, au=2, bu=1, overlapCoefficient=TRUE) {
+  if(overlapCoefficient==TRUE) {
     print("Running batch static FMCS and returning the overlap coefficient")
     d <- sapply(cid(SDFset), function(x) fmcsBatch(SDFset[x], SDFset, au=au, bu=bu, matching.mode="static", numParallel=12)[,"Overlap_Coefficient"])
   } else {
@@ -25,8 +25,8 @@ clusterWithFMCSStatic <- function(SDFset, au=2, bu=1, coefficient=1) {
 
 #=========================================
 
-clusterWithFMCSRing <- function(SDFset, au=2, bu=1, coefficient=1) {
-   if(coefficient==1) {
+clusterWithFMCSRing <- function(SDFset, au=2, bu=1, overlapCoefficient=TRUE) {
+   if(overlapCoefficient==TRUE) {
     print("Running batch ring FMCS and returning the overlap coefficient")
     d <- sapply(cid(SDFset), function(x) fmcsBatch(SDFset[x], SDFset, au=au, bu=bu, matching.mode="ring", numParallel=12)[,"Overlap_Coefficient"])
   } else {
