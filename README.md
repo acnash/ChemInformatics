@@ -24,7 +24,7 @@ You are going to need a Net connection.</br>
 Load the R files into the R environment using:</br>
 source("CHEMAPI.R")
 
-For a list of the most recent available functions execute:</br>
+For a list of the most recent available <b>(this list is old and outdated)</b> functions execute:</br>
 listChemMethods()
 
 <b>CHEMIO.R</b></br>
