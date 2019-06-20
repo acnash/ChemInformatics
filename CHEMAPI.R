@@ -8,11 +8,14 @@ library(MASS)
 library(ggplot2)
 library(bioassayR)
 library(biomaRt)
+library(dendsort)
+library(org.Hs.eg.db)
 
-source("CHEMIO.R")
-source("CHEMAnalysis.R")
-source("CHEMDisplay.R")
-source("CHEMBioassay.R")
+source("~/Documents/CHEM/CHEMIO.R")
+source("~/Documents/CHEM/CHEMAnalysis.R")
+source("~/Documents/CHEM/CHEMDisplay.R")
+source("~/Documents/CHEM/CHEMBioassay.R")
+source("~/Documents/CHEM/CMAPDrugGeneDriver.R")
 
 
 listCHEMMethods <- function() {

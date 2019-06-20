@@ -1,6 +1,6 @@
 source("CHEMAPI.R")
 
-#I don't think I can call external to the server i.e., net access
+#I don't think I can call external to the server i.e., I need to have net access for this part
 #drugFile <- loadCIDFile("drugs_names.txt")
 compounds <- loadSDFFile("compounds.sdf") 
 

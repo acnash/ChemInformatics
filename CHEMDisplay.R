@@ -1,20 +1,20 @@
-displayClusterDend <- function(simMatrix, CIDvector) {
-  colnames(simMatrix) <- CIDvector
-  row.names(simMatrix) <- CIDvector
+displayClusterDend <- function(simMatrix, Namevector) {
+  colnames(simMatrix) <- Namevector
+  row.names(simMatrix) <- Namevector
   hCluster <- hclust(as.dist(1-simMatrix), method="complete") 
   dend <- as.dendrogram(hCluster)
-  dend %>% set('labels_cex',0.5) %>% highlight_branches_col(viridis(100)) #%>% plot(main=title)
+  dend %>% dendextend::set('labels_cex',0.5) %>% highlight_branches_col(viridis(100)) 
   return(dend)
 }
 
 #========================================================================
 
-displayClusterHeatMap <- function(simMatrix, CIDvector, title=NULL) {
-  colnames(simMatrix) <- CIDvector
-  row.names(simMatrix) <- CIDvector
+displayClusterHeatMap <- function(simMatrix, compoundName) {
+  colnames(simMatrix) <- compoundName
+  row.names(simMatrix) <- compoundName
   hc <- hclust(as.dist(1-simMatrix), method="single")
-  heatmap <- heatmap.2(1-simMatrix, Rowv=as.dendrogram(hc), Colv=as.dendrogram(hc), col=colorpanel(40, "darkblue", "yellow", "white"), density.info="none", trace="none")
-  return(headmap)
+  heatmap <- heatmap.2(1-simMatrix, Rowv=as.dendrogram(hc), Colv=as.dendrogram(hc), col=colorpanel(40, "darkred", "yellow", "white"), density.info="none", trace="none")
+  return(heatmap)
 }
 
 #========================================================================
